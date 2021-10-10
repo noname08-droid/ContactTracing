@@ -15,7 +15,7 @@ public class showInfoActivity extends AppCompatActivity {
     TextView txtName, txtAge, txtAddress, txtContact;
     ImageView txtImage;
     DatabaseHelper databaseHelper;
-
+//asdfoiutwo
 //    String dataID = getIntent().getExtras().getString("ResultID");
     Bundle extras = getIntent().getExtras();
     String dataID = extras.getString("ResultID");
