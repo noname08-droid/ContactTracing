@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/drawable/ic_baseline_local_phone.xml" value="0.1125" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/drawable/ic_baseline_my_location.xml" value="0.1125" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/drawable/ic_baseline_person.xml" value="0.1125" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/app_bar_main.xml" value="0.14673913043478262" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/content_main.xml" value="0.9" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/fragment_generator.xml" value="0.1" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/fragment_home.xml" value="0.11730072463768115" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/fragment_information.xml" value="0.22" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/fragment_scanner.xml" value="0.1" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/list_layout.xml" value="0.292259083728278" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/nav_header_main.xml" value="0.15670289855072464" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/new_layout.xml" value="0.14673913043478262" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/qrimageview.xml" value="0.1" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/row.xml" value="0.18" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/menu/activity_main_drawer.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/menu/main.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/menu/main_layout.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/menu/main_menu.xml" value="0.22" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
