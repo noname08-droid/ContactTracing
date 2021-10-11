@@ -15,9 +15,12 @@ public class showInfoActivity extends AppCompatActivity {
     TextView txtName, txtAge, txtAddress, txtContact;
     ImageView txtImage;
     DatabaseHelper databaseHelper;
+
+
 //    String dataID = getIntent().getExtras().getString("ResultID");
-    Bundle extras = getIntent().getExtras();
-    String dataID = extras.getString("ResultID");
+//    Bundle extras = getIntent().getExtras();
+//    String dataID = extras.getString("ResultID");
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
