@@ -24,9 +24,6 @@ import androidmads.library.qrgenearator.QRGEncoder;
 
 public class ListDataActivity extends AppCompatActivity {
 
-    private Bitmap bitmap;
-    private QRGEncoder idEncoder;
-    private String Put_ID;
 
     DatabaseHelper mDatabaseHelper;
     RecyclerView mRecyclerView;

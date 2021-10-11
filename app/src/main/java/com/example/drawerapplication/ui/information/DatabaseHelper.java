@@ -55,6 +55,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL3, String.valueOf(address));
         contentValues.put(COL4, String.valueOf(age));
         contentValues.put(COL5, String.valueOf(contact));
+
         Log.d(TAG, "addData: Adding " + name + address + age + contact +
                 " to " + TABLE_NAME);
 

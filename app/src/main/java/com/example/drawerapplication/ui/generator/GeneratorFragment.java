@@ -27,8 +27,6 @@ public class GeneratorFragment extends Fragment {
 
 
     ListDataActivity listDataActivity = new ListDataActivity();
-
-    public String resultID;
     public TextView tv_View;
     private FragmentGeneratorBinding binding;
     private CodeScanner mCode_Scanner;
