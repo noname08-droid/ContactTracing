@@ -76,10 +76,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Cursor getID(int id, TextView txtName, TextView txtAge, TextView txtAddress, TextView txtContact) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +
-                "_id" + "=?", new String[]{Integer.toString(id)});
-
-
-
+                "_id" + "=?", new String[]{String.valueOf(id)});
         return res;
     }
 }

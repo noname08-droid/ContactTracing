@@ -53,16 +53,9 @@ public class GeneratorFragment extends Fragment {
                     @Override
                     public void run() {
                         tv_View.setText(result.getText());
-
-                        resultID  = result.getText();
-
-                        if (tv_View.getText() == resultID){
-                            Intent intent = new Intent(getContext(), showInfoActivity.class);
-                            intent.putExtra("ResultID", resultID);
-                            startActivity(intent);
-                        }
-
-
+                        Intent intent = new Intent(getContext(), showInfoActivity.class);
+                        intent.putExtra("ayDi", tv_View.getText());
+                        startActivity(intent);
                     }
                 });
 
