@@ -40,10 +40,11 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     Context context;
     public ArrayList id, name, address, age, contact;
-    private Bitmap bitmap;
-    private QRGEncoder idEncoder;
-    public String Put_ID, Put_NAME;
-    public ImageView ImageID, ShowImageID;
+    public Bitmap bitmap;
+    public QRGEncoder idEncoder;
+    public String Put_ID;
+    private ImageView ImageID;
+    public ImageView ShowImageID;
 
     private String savePath = Environment.getExternalStorageDirectory().getPath() + "/QRCode/";
     private AppCompatActivity activity;
@@ -145,6 +146,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                     }
                 });
 
+
                 Put_ID = (String) id.get(position);
                 if (Put_ID.length() > 0) {
 
@@ -180,15 +182,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             }
         });
 
-
-
     }
 
     @Override
     public int getItemCount() {
         return id.size();
     }
-
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
@@ -203,24 +202,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             list_Contact = itemView.findViewById(R.id.list_contact);
 
             ImageID = itemView.findViewById(R.id.imageView);
-//            btnSaveImage = (Button) itemView.findViewById(R.id.btnSaveImage);
-
-//            btnShare = itemView.findViewById(R.id.btnShare);
-//
-//            btnShare.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    shareImage();
-//
-//                }
-//            });
         }
-//        private void shareImage() {
-//            StrictMode.VmPolicy.Builder builder  = new StrictMode.VmPolicy.Builder();
-//            StrictMode.setVmPolicy(builder.build());
-//            drawable = (BitmapDrawable) ShowImageID.getDrawable();
-//            bitmap = drawable.getBitmap();
-//        }
     }
 
 }

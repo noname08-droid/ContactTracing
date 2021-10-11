@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -73,19 +74,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
-    public Cursor getID(int id, TextView txtName, TextView txtAge, TextView txtAddress, TextView txtContact) {
+    public Cursor getID(int id, TextView txtName, TextView txtAge, TextView txtAddress, TextView txtContact, ImageView txtImage) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +
-                "_id" + "=?", new String[]{Integer.toString(id)});
-
-        while(res.moveToFirst()){
-
-            txtName.setText(res.getString(Integer.parseInt(res.getString(0))));
-            txtAddress.setText(res.getString(Integer.parseInt(res.getString(1))));
-            txtAge.setText(res.getString(Integer.parseInt(res.getString(2))));
-            txtContact.setText(res.getString(Integer.parseInt(res.getString(3))));
-
-        }
+                "ID" + "=?", new String[]{String.valueOf(id)});
 
         return res;
     }

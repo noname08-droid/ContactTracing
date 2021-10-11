@@ -1,7 +1,10 @@
 package com.example.drawerapplication.ui.information;
 
 
+import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -12,19 +15,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.drawerapplication.R;
 
 public class showInfoActivity extends AppCompatActivity {
-    TextView txtName, txtAge, txtAddress, txtContact;
+    public TextView txtName, txtAge, txtAddress, txtContact;
     ImageView txtImage;
-    DatabaseHelper databaseHelper;
+    CustomAdapter customAdapter;
 
-
-//    String dataID = getIntent().getExtras().getString("ResultID");
-//    Bundle extras = getIntent().getExtras();
-//    String dataID = extras.getString("ResultID");
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_layout);
+        Intent intent = getIntent();
+        Integer dataID =Integer.parseInt(intent.getStringExtra("ayDi"));
+
         txtName = (TextView) findViewById(R.id.name_Text);
         txtAddress = (TextView) findViewById(R.id.address_Text);
         txtAge = (TextView) findViewById(R.id.age_Text);
@@ -32,10 +34,22 @@ public class showInfoActivity extends AppCompatActivity {
         txtImage = (ImageView) findViewById(R.id.qrImage);
 
 
+        //Instead of retrieving data on DatabaseHelper, we can do that here
+        DatabaseHelper db = new DatabaseHelper(this);
+        Cursor cursor = db.getID(dataID,txtName,txtAddress,txtAge,txtContact,txtImage);
+        cursor.moveToFirst();
+        txtName.setText(cursor.getString(1));//columnindex 0 is for ID number
+        txtAddress.setText(cursor.getString(2));
+        txtAge.setText(cursor.getString(3));
+        txtContact.setText(cursor.getString(4));
+        txtImage.setImageResource(Integer.parseInt(cursor.getString(5)));
 
-//        databaseHelper.getID(dataID, txtName, txtAddress,
-//                txtAge, txtContact);
+        txtImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(showInfoActivity.this, "Image Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-//        Toast.makeText(showInfoActivity.this, "value of id" + dataID, Toast.LENGTH_SHORT).show();
     }
 }
