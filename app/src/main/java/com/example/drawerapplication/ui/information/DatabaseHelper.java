@@ -78,14 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor res =  db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +
                 "_id" + "=?", new String[]{Integer.toString(id)});
 
-        while(res.moveToFirst()){
 
-            txtName.setText(res.getString(Integer.parseInt(res.getString(0))));
-            txtAddress.setText(res.getString(Integer.parseInt(res.getString(1))));
-            txtAge.setText(res.getString(Integer.parseInt(res.getString(2))));
-            txtContact.setText(res.getString(Integer.parseInt(res.getString(3))));
-
-        }
 
         return res;
     }
