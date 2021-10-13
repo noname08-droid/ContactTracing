@@ -2,7 +2,6 @@ package com.example.drawerapplication.ui.information;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -20,10 +19,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.drawerapplication.R;
@@ -39,14 +39,15 @@ import androidmads.library.qrgenearator.QRGSaver;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     Context context;
-    private ArrayList id, name, address, age, contact;
+    public ArrayList id, name, address, age, contact;
     private Bitmap bitmap;
     private QRGEncoder idEncoder;
-    public String Put_ID;
-    private ImageView ImageID;
-    private ImageView ShowImageID;
+    public String Put_ID, Put_NAME;
+    public ImageView ImageID, ShowImageID;
 
     private String savePath = Environment.getExternalStorageDirectory().getPath() + "/QRCode/";
+    private AppCompatActivity activity;
+    List<String> recyclerListAll;
 
     public CustomAdapter(Context context, ArrayList id,
                          ArrayList name, ArrayList address,
@@ -58,6 +59,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.address = address;
         this.age = age;
         this.contact = contact;
+        this.recyclerListAll = new ArrayList<>(name);
+
+    }
+
+    public CustomAdapter(FragmentActivity activity) {
+        this.context = activity;
     }
 
     @NonNull
@@ -106,6 +113,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         }
 
+
         ImageID.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,32 +122,28 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 View view_template_layout = inflater.inflate(R.layout.qrimageview, null);
                 ShowImageID = (ImageView) view_template_layout.findViewById(R.id.show_Images);//and set image to image view
                 Button btnSaveImage = (Button) view_template_layout.findViewById(R.id.btnSaveImage);
-                Button btnPrint = (Button) view_template_layout.findViewById(R.id.btnPrint);
 
 
-                String stringValue = holder.list_Name.getText().toString().trim();
+                String stringValue = "image";
                 btnSaveImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        if (ContextCompat.checkSelfPermission(context.getApplicationContext(),
-                                Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+                        if (ContextCompat.checkSelfPermission(context.getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                             try {
 
                                 boolean nameSave = new QRGSaver().save(savePath, stringValue,
                                         bitmap, QRGContents.ImageType.IMAGE_JPEG);
                                 String nameResult = nameSave ? "Image Saved" : "Image Not Saved";
-                                Toast.makeText(context, nameResult, Toast.LENGTH_LONG).show();
+                                Toast.makeText(activity, nameResult, Toast.LENGTH_LONG).show();
 
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
                         } else {
-                            ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+                            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
                         }
                     }
                 });
-                
-
 
                 Put_ID = (String) id.get(position);
                 if (Put_ID.length() > 0) {
@@ -176,6 +180,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             }
         });
 
+
+
     }
 
     @Override
@@ -183,10 +189,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return id.size();
     }
 
+
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
        public TextView list_Id, list_Name, list_Address, list_Age, list_Contact;
-
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -197,8 +203,24 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             list_Contact = itemView.findViewById(R.id.list_contact);
 
             ImageID = itemView.findViewById(R.id.imageView);
-        }
+//            btnSaveImage = (Button) itemView.findViewById(R.id.btnSaveImage);
 
+//            btnShare = itemView.findViewById(R.id.btnShare);
+//
+//            btnShare.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    shareImage();
+//
+//                }
+//            });
+        }
+//        private void shareImage() {
+//            StrictMode.VmPolicy.Builder builder  = new StrictMode.VmPolicy.Builder();
+//            StrictMode.setVmPolicy(builder.build());
+//            drawable = (BitmapDrawable) ShowImageID.getDrawable();
+//            bitmap = drawable.getBitmap();
+//        }
     }
 
 }

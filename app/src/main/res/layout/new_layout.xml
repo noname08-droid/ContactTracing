@@ -16,7 +16,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:text="Name of person"
+        android:text="No data registered"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"/>
 
@@ -25,7 +25,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:text="Address of person"
+        android:text="No data registered"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"/>
 
@@ -34,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:text="Age of person"
+        android:text="No data registered"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"/>
 
@@ -43,7 +43,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="15sp"
-        android:text="Contact of person"
+        android:text="No data registered"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"/>
 
@@ -60,7 +60,8 @@
             android:layout_height="wrap_content"
             android:text="Register"
             android:textStyle="bold"
-            android:textAllCaps="false"/>
+            android:textAllCaps="false"
+            android:visibility="invisible"/>
 
     </LinearLayout>
 

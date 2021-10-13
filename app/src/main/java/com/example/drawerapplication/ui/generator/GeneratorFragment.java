@@ -40,6 +40,7 @@ public class GeneratorFragment extends Fragment {
         CodeScannerView codeScanner = binding.scannerView;
         tv_View = binding.tvView;
 
+        try{
 
         mCode_Scanner = new CodeScanner(getContext(), codeScanner);
         mCode_Scanner.setDecodeCallback(new DecodeCallback() {
@@ -48,21 +49,18 @@ public class GeneratorFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        try {
                             tv_View.setText(result.getText());
                             Intent intent = new Intent(getContext(), showInfoActivity.class);
                             intent.putExtra("ayDi", tv_View.getText());
                             startActivity(intent);
-                        }catch (Exception e){
-                            e.printStackTrace();
-                        }
-
                     }
                 });
 
             }
         });
-
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
         codeScanner.setOnClickListener(new View.OnClickListener() {
             @Override
