@@ -47,6 +47,7 @@ public class showInfoActivity extends AppCompatActivity {
         txtContact = (TextView) findViewById(R.id.contact_Text);
         txtImage = (ImageView) findViewById(R.id.qrImage);
 
+
         DatabaseHelper db = new DatabaseHelper(this);
         cursor = db.getID(dataID,txtName,txtAddress,txtAge,txtContact,txtImage);
         }catch (Exception e){
