@@ -59,7 +59,7 @@ public class showInfoActivity extends AppCompatActivity {
             btnRegister.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
+                    //Enter the intent for inforgragment here
                 }
             });
             Toast.makeText(showInfoActivity.this, "Not yet registered", Toast.LENGTH_SHORT).show();
