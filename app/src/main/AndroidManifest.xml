@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.example.drawerapplication">
 
     <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"
+        tools:ignore="ScopedStorage" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +16,6 @@
         android:theme="@style/Theme.DrawerApplication">
         <activity android:name=".ui.information.ListDataActivity"/>
         <activity android:name=".ui.information.showInfoActivity"/>
-
         <activity
             android:name=".MainActivity"
             android:exported="true"
