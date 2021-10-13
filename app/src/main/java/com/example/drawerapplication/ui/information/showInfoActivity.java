@@ -39,8 +39,8 @@ public class showInfoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_layout);
         try {
-            Intent intent = getIntent();
-            dataID = Integer.parseInt(intent.getStringExtra("ayDi"));
+        Intent intent = getIntent();
+        dataID = Integer.parseInt(intent.getStringExtra("ayDi"));
         txtName = (TextView) findViewById(R.id.name_Text);
         txtAddress = (TextView) findViewById(R.id.address_Text);
         txtAge = (TextView) findViewById(R.id.age_Text);
