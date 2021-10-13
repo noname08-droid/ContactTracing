@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
-import com.example.drawerapplication.R;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 

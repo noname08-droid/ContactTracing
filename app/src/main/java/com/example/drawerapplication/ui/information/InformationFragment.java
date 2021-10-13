@@ -25,6 +25,7 @@ public class InformationFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
 
+
         binding = FragmentInformationBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
