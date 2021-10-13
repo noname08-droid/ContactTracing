@@ -2,11 +2,7 @@ package com.example.drawerapplication.ui.information;
 
 
 import android.database.Cursor;
-import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.widget.EditText;
 import android.widget.Toast;
 
 
@@ -18,16 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.drawerapplication.R;
 
 import java.util.ArrayList;
-import java.util.Locale;
-
-import androidmads.library.qrgenearator.QRGEncoder;
 
 public class ListDataActivity extends AppCompatActivity {
 
 
     DatabaseHelper mDatabaseHelper;
     RecyclerView mRecyclerView;
-    public ArrayList<String> id, name, address, age, contact;
+    ArrayList<String> id, name, address, age, contact;
     CustomAdapter customAdapter;
 
     @Override

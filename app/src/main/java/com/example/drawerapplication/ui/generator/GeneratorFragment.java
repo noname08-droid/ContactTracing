@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CursorAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,12 +26,10 @@ import com.google.zxing.Result;
 
 public class GeneratorFragment extends Fragment {
 
-
-    ListDataActivity listDataActivity = new ListDataActivity();
     public TextView tv_View;
     private FragmentGeneratorBinding binding;
     private CodeScanner mCode_Scanner;
-
+    showInfoActivity showInfo;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -38,10 +37,9 @@ public class GeneratorFragment extends Fragment {
         binding = FragmentGeneratorBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-
-
         CodeScannerView codeScanner = binding.scannerView;
         tv_View = binding.tvView;
+
 
         mCode_Scanner = new CodeScanner(getContext(), codeScanner);
         mCode_Scanner.setDecodeCallback(new DecodeCallback() {
@@ -50,11 +48,14 @@ public class GeneratorFragment extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        tv_View.setText(result.getText());
-
-                        Intent intent = new Intent(getContext(), showInfoActivity.class);
-                        intent.putExtra("ayDi", tv_View.getText());
-                        startActivity(intent);
+                        try {
+                            tv_View.setText(result.getText());
+                            Intent intent = new Intent(getContext(), showInfoActivity.class);
+                            intent.putExtra("ayDi", tv_View.getText());
+                            startActivity(intent);
+                        }catch (Exception e){
+                            e.printStackTrace();
+                        }
 
                     }
                 });
