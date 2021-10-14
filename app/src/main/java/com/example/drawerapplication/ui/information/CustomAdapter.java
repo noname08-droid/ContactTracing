@@ -29,7 +29,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.drawerapplication.R;
 
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import androidmads.library.qrgenearator.QRGContents;
@@ -42,7 +44,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public ArrayList id, name, address, age, contact;
     private Bitmap bitmap;
     private QRGEncoder idEncoder;
-    public String Put_ID, Put_NAME;
+    public String Put_ID;
     public ImageView ImageID, ShowImageID;
 
     private String savePath = Environment.getExternalStorageDirectory().getPath() + "/QRCode/";
@@ -124,7 +126,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 Button btnSaveImage = (Button) view_template_layout.findViewById(R.id.btnSaveImage);
 
 
-                String stringValue = "image";
+                String stringValue = holder.list_Name.getText().toString().trim();
                 btnSaveImage.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -193,6 +195,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
        public TextView list_Id, list_Name, list_Address, list_Age, list_Contact;
+       TextView date;
+       NewHelper newHelper;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -203,24 +207,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             list_Contact = itemView.findViewById(R.id.list_contact);
 
             ImageID = itemView.findViewById(R.id.imageView);
-//            btnSaveImage = (Button) itemView.findViewById(R.id.btnSaveImage);
 
-//            btnShare = itemView.findViewById(R.id.btnShare);
-//
-//            btnShare.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    shareImage();
-//
-//                }
-//            });
+            date = itemView.findViewById(R.id.date);
+            newHelper = new NewHelper(context);
+            newHelper.addDATE(date.getText().toString().trim());
+
+
         }
-//        private void shareImage() {
-//            StrictMode.VmPolicy.Builder builder  = new StrictMode.VmPolicy.Builder();
-//            StrictMode.setVmPolicy(builder.build());
-//            drawable = (BitmapDrawable) ShowImageID.getDrawable();
-//            bitmap = drawable.getBitmap();
-//        }
     }
 
 }
