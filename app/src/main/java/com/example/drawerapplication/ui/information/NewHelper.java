@@ -1,6 +1,5 @@
 package com.example.drawerapplication.ui.information;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -9,8 +8,6 @@ import androidx.annotation.Nullable;
 
 import java.sql.Date;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Locale;
 
 public class NewHelper extends SQLiteOpenHelper {
 
@@ -40,18 +37,22 @@ public class NewHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-//    public long addDATE(String date) {
-//        SQLiteDatabase db = this.getWritableDatabase();
-//        date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
-//        ContentValues contentvalues = new ContentValues();
-//        contentvalues.put(DATE,String.valueOf(Date.valueOf(date)));
-//        long result = db.insert(TABLE_DATE, date, contentvalues);
-//        return result;
-//    }
-public String getDateTime(Date date) {
-    SimpleDateFormat dateFormat = new SimpleDateFormat(
-            "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
-    return dateFormat.format(date);
+protected void getDateTime(String datetime) {
+//    SimpleDateFormat dateFormat = new SimpleDateFormat(
+//            "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+//
+//    return dateFormat.format(date);
+    try{
+        String dateobj = "Fri Oct 15 04:45:21 EDT 2021";
+        SimpleDateFormat format = new SimpleDateFormat("EEE MMM dd HH:mm:ss z yyyy"); //
+        SimpleDateFormat format1 = new SimpleDateFormat("dd.MM.yyyy. HH:mm:ss"); // for display
+
+        Date date = (Date) format.parse(dateobj); // parse it to date
+        System.out.print(format1.format(date)); // display the date to format you like
+        // the print result is : 15.10.2021. 08:45:21
+    } catch (Exception e){
+        System.out.print("error");
+    }
 }
 
 }

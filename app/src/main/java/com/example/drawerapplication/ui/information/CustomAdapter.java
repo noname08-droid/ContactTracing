@@ -80,7 +80,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         View view = layoutInflater.inflate(R.layout.row, parent, false);
         date = view.findViewById(R.id.date);
         newHelper = new NewHelper(context);
-        newHelper.getDateTime(Date.valueOf(date.toString()));
+        newHelper.getDateTime(date.getText().toString());
+
         return new MyViewHolder(view);
     }
 
