@@ -10,6 +10,7 @@ import androidx.annotation.Nullable;
 import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Locale;
 
 public class NewHelper extends SQLiteOpenHelper {
 
@@ -25,6 +26,7 @@ public class NewHelper extends SQLiteOpenHelper {
         this.context = context;
     }
 
+
     @Override
     public void onCreate(SQLiteDatabase db) {
         String create_table = "CREATE TABLE " + TABLE_DATE + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -38,17 +40,18 @@ public class NewHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean addDATE(String date) {
-        SQLiteDatabase db = this.getWritableDatabase();
-        date = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
-        ContentValues contentvalues = new ContentValues();
-        contentvalues.put(DATE,String.valueOf(Date.valueOf(date)));
-        long result = db.insert(TABLE_DATE, null, contentvalues);
-        if (result == -1){
-            return false;
-        }else {
-            return true;
-        }
-    }
+//    public long addDATE(String date) {
+//        SQLiteDatabase db = this.getWritableDatabase();
+//        date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(Calendar.getInstance().getTime());
+//        ContentValues contentvalues = new ContentValues();
+//        contentvalues.put(DATE,String.valueOf(Date.valueOf(date)));
+//        long result = db.insert(TABLE_DATE, date, contentvalues);
+//        return result;
+//    }
+public String getDateTime(Date date) {
+    SimpleDateFormat dateFormat = new SimpleDateFormat(
+            "yyyy-MM-dd HH:mm:ss", Locale.getDefault());
+    return dateFormat.format(date);
+}
 
 }

@@ -29,6 +29,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.drawerapplication.R;
 
 
+import java.sql.Date;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -46,6 +47,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private QRGEncoder idEncoder;
     public String Put_ID;
     public ImageView ImageID, ShowImageID;
+    TextView date;
+    NewHelper newHelper;
 
     private String savePath = Environment.getExternalStorageDirectory().getPath() + "/QRCode/";
     private AppCompatActivity activity;
@@ -75,6 +78,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.row, parent, false);
+        date = view.findViewById(R.id.date);
+        newHelper = new NewHelper(context);
+        newHelper.getDateTime(Date.valueOf(date.toString()));
         return new MyViewHolder(view);
     }
 
@@ -195,8 +201,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
        public TextView list_Id, list_Name, list_Address, list_Age, list_Contact;
-       TextView date;
-       NewHelper newHelper;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -208,9 +213,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
             ImageID = itemView.findViewById(R.id.imageView);
 
-            date = itemView.findViewById(R.id.date);
-            newHelper = new NewHelper(context);
-            newHelper.addDATE(date.getText().toString().trim());
 
 
         }
