@@ -5,12 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
+
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -23,10 +23,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String COL3 = "ADDRESS";
     private static final String COL4 = "AGE";
     private static final String COL5 = "CONTACT";
+    private static final String COL6 = "DATE";
+    private static final String COL7 = "TIME";
+
+    private static final String TABLE_NAME2 = "TIME";
+    private static final String T2COL1 = "ID";
+    private static final String T2COL2 = "DATE_IN";
+    private static final String T2COL3 = "Time_IN";
 
 
     public DatabaseHelper(@Nullable FragmentActivity context) {
-        super(context, TABLE_NAME, null, 1);
+        super(context, TABLE_NAME, null, 2);
         this.context = context;
     }
 
@@ -35,17 +42,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, "
-                + COL2 + " TEXT, " + COL3 + " TEXT, " + COL4 + " TEXT, " + COL5 + " INTEGER);";
+                + COL2 + " TEXT, " + COL3 + " TEXT, " + COL4 + " TEXT, " +
+                COL5 + " INTEGER, " + COL6 + " TEXT, " + COL7 + " TEXT);";
         sqLiteDatabase.execSQL(createTable);
+
+        String createTable2 = "CREATE TABLE " + TABLE_NAME2 + " (ID INTEGER, "
+                + T2COL2 + " TEXT, " + T2COL3 + " TEXT);";
+        sqLiteDatabase.execSQL(createTable2);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
+        sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME2);
         onCreate(sqLiteDatabase);
     }
 
-    public boolean addData(String name, String address, String age, Long contact){
+    public boolean addData(String name, String address, String age, Long contact, String date, String time){
 
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -54,6 +67,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         contentValues.put(COL3, String.valueOf(address));
         contentValues.put(COL4, String.valueOf(age));
         contentValues.put(COL5, String.valueOf(contact));
+        contentValues.put(COL6, String.valueOf(date));
+        contentValues.put(COL7, String.valueOf(time));
 
         long result = db.insert(TABLE_NAME, null, contentValues);
         if (result == -1){
@@ -63,6 +78,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
 
     }
+    public boolean addTimeInData( Integer id, String timeIN, String timeIN2){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+
+        contentValues.put(T2COL1, Integer.parseInt(String.valueOf(id)));
+        contentValues.put(T2COL2, String.valueOf(timeIN));
+        contentValues.put(T2COL3, String.valueOf(timeIN2));
+
+        long result = db.insert(TABLE_NAME2, null, contentValues);
+        if (result == -1){
+            return false;
+        }else {
+            return true;
+        }
+    }
+
 
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();

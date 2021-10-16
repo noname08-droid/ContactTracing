@@ -18,14 +18,23 @@
         android:layout_marginBottom="2dp">
 
         <TextView
-            android:id="@+id/date"
+            android:id="@+id/addDate"
             android:layout_width="wrap_content"
             android:layout_gravity="center"
             android:layout_height="wrap_content"
             android:text="yyyy-MM-dd"
             android:textSize="13sp"/>
-    </LinearLayout>
 
+        <TextView
+            android:id="@+id/addTime"
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="8dp"
+            android:layout_height="wrap_content"
+            android:text="HH-SS A"
+            android:textSize="13sp"/>
+
+    </LinearLayout>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

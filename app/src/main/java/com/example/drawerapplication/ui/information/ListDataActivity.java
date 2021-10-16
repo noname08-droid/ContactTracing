@@ -20,7 +20,7 @@ public class ListDataActivity extends AppCompatActivity {
 
     DatabaseHelper mDatabaseHelper;
     RecyclerView mRecyclerView;
-    ArrayList<String> id, name, address, age, contact;
+    ArrayList<String> id, name, address, age, contact, date, time;
     CustomAdapter customAdapter;
 
     @Override
@@ -40,9 +40,11 @@ public class ListDataActivity extends AppCompatActivity {
         address = new ArrayList<>();
         age = new ArrayList<>();
         contact = new ArrayList<>();
+        date = new ArrayList<>();
+        time = new ArrayList<>();
 
         displayData();
-        customAdapter = new CustomAdapter(ListDataActivity.this,id, name, address, age, contact);
+        customAdapter = new CustomAdapter(ListDataActivity.this,id, name, address, age, contact, date, time);
         mRecyclerView.setAdapter(customAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(ListDataActivity.this));
 
@@ -59,6 +61,8 @@ public class ListDataActivity extends AppCompatActivity {
                 address.add(cursor.getString(2));
                 age.add(cursor.getString(3));
                 contact.add(cursor.getString(4));
+                date.add(cursor.getString(5));
+                time.add(cursor.getString(6));
             }
         }
 

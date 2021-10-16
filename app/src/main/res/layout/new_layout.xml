@@ -8,6 +8,40 @@
         android:layout_height="wrap_content"
         android:id="@+id/new_layout"
         android:orientation="vertical">
+        <TextView
+            android:id="@+id/newID"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="ID"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:visibility="visible"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center">
+
+        <TextView
+            android:id="@+id/Date_In"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15sp"
+            android:text="yyy:mm:dd"
+            android:layout_marginTop="10dp"/>
+
+            <TextView
+                android:id="@+id/Time_In"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:layout_marginStart="8dp"
+                android:text="hh:ss a"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
 
     <ImageView
         android:layout_marginTop="10dp"
@@ -52,11 +86,10 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal"
         android:layout_gravity="center">
 
         <androidx.appcompat.widget.AppCompatButton
@@ -69,6 +102,15 @@
             android:textAllCaps="false"
             android:visibility="invisible"/>
 
-        </LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTimeIn"
+            android:background="@drawable/shape"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TimeIn"
+            android:textStyle="bold"
+            android:textAllCaps="false"
+            android:visibility="invisible"/>
+        </RelativeLayout>
     </LinearLayout>
 </ScrollView>

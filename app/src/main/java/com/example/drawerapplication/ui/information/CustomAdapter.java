@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.icu.text.SimpleDateFormat;
+import android.os.Build;
 import android.os.Environment;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -30,10 +33,9 @@ import com.example.drawerapplication.R;
 
 
 import java.sql.Date;
-import java.text.DateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
@@ -42,13 +44,11 @@ import androidmads.library.qrgenearator.QRGSaver;
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     Context context;
-    public ArrayList id, name, address, age, contact;
+    public ArrayList id, name, address, age, contact, date, time;
     private Bitmap bitmap;
     private QRGEncoder idEncoder;
     public String Put_ID;
     public ImageView ImageID, ShowImageID;
-    TextView date;
-    NewHelper newHelper;
 
     private String savePath = Environment.getExternalStorageDirectory().getPath() + "/QRCode/";
     private AppCompatActivity activity;
@@ -56,7 +56,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public CustomAdapter(Context context, ArrayList id,
                          ArrayList name, ArrayList address,
-                         ArrayList age, ArrayList contact){
+                         ArrayList age, ArrayList contact, ArrayList date, ArrayList time){
 
         this.context = context;
         this.id = id;
@@ -64,6 +64,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.address = address;
         this.age = age;
         this.contact = contact;
+        this.date = date;
+        this.time = time;
         this.recyclerListAll = new ArrayList<>(name);
 
     }
@@ -72,19 +74,17 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.context = activity;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @NonNull
     @Override
     public CustomAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         LayoutInflater layoutInflater = LayoutInflater.from(context);
         View view = layoutInflater.inflate(R.layout.row, parent, false);
-        date = view.findViewById(R.id.date);
-        newHelper = new NewHelper(context);
-        newHelper.getDateTime(date.getText().toString());
-
         return new MyViewHolder(view);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public void onBindViewHolder(@NonNull CustomAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.list_Id.setText(String.valueOf(id.get(position)));
@@ -92,6 +92,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         holder.list_Address.setText(String.valueOf(address.get(position)));
         holder.list_Age.setText(String.valueOf(age.get(position)));
         holder.list_Contact.setText(String.valueOf(contact.get(position)));
+        holder.addDate.setText(String.valueOf(date.get(position)));
+        holder.addTime.setText(String.valueOf(time.get(position)));
 
         Put_ID = (String) id.get(position);
 
@@ -202,8 +204,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
        public TextView list_Id, list_Name, list_Address, list_Age, list_Contact;
+       public TextView addDate, addTime;
 
 
+        @RequiresApi(api = Build.VERSION_CODES.N)
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             list_Id = itemView.findViewById(R.id.ID);
@@ -212,12 +216,14 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
             list_Age = itemView.findViewById(R.id.list_age);
             list_Contact = itemView.findViewById(R.id.list_contact);
 
+            addDate = itemView.findViewById(R.id.addDate);
+            addTime = itemView.findViewById(R.id.addTime);
+
             ImageID = itemView.findViewById(R.id.imageView);
 
 
 
         }
     }
-
 }
 

@@ -2,14 +2,13 @@ package com.example.drawerapplication.ui.information;
 
 
 import android.annotation.SuppressLint;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
@@ -20,17 +19,24 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.drawerapplication.R;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
+
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 
 public class showInfoActivity extends AppCompatActivity {
-    TextView txtName, txtAge, txtAddress, txtContact;
-    Button btnRegister;
+    TextView txtName, txtAge, txtAddress, txtContact, Date_In, newID, Time_In;
+    Button btnRegister, btnTimeIn;
     ImageView txtImage;
     private Bitmap bitmap;
     private QRGEncoder idEncoder;
@@ -38,7 +44,9 @@ public class showInfoActivity extends AppCompatActivity {
     public Cursor cursor;
     private androidx.fragment.app.FragmentManager fragmentManager = getSupportFragmentManager();
     private InformationFragment informationFragment;
+    DatabaseHelper mdatabasehelper;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,14 +61,26 @@ public class showInfoActivity extends AppCompatActivity {
         txtContact = (TextView) findViewById(R.id.contact_Text);
         txtImage = (ImageView) findViewById(R.id.qrImage);
         btnRegister = (Button) findViewById(R.id.btnRegister);
+        btnTimeIn = (Button) findViewById(R.id.btnTimeIn);
+        Date_In = (TextView)findViewById(R.id.Date_In);
+        Time_In = (TextView)findViewById(R.id.Time_In);
+        newID = (TextView)findViewById(R.id.newID);
+
+        Calendar calendar = Calendar.getInstance();
+        String currentDate = DateFormat.getDateInstance().format(calendar.getTime());
+        Date_In.setText(currentDate);
+
+        Time_In.setText(getCurrentTime());
 
 
+        mdatabasehelper = new DatabaseHelper(showInfoActivity.this);
 //Instead of retrieving data on DatabaseHelper, we can do that here
 
 
         DatabaseHelper db = new DatabaseHelper(this);
         cursor = db.getID(dataID,txtName,txtAddress,txtAge,txtContact,txtImage);
         if(cursor.getCount() == 0){
+
             btnRegister.setVisibility(View.VISIBLE);
             btnRegister.setOnClickListener(new View.OnClickListener() {
 
@@ -77,16 +97,24 @@ public class showInfoActivity extends AppCompatActivity {
             Toast.makeText(showInfoActivity.this, "Not yet registered", Toast.LENGTH_SHORT).show();
         }else {
             while (cursor.moveToNext()){
+                newID.setText(cursor.getString(0));
                 txtName.setText(cursor.getString(1));//columnindex 0 is for ID number
                 txtAddress.setText(cursor.getString(2));
                 txtAge.setText(cursor.getString(3));
                 txtContact.setText(cursor.getString(4));
-                txtImage.setImageResource(cursor.getPosition());
+
+                btnTimeIn.setVisibility(View.VISIBLE);
+                btnTimeIn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mdatabasehelper.addTimeInData(Integer.parseInt(newID.getText().toString().trim()),
+                                Date_In.getText().toString().trim(), Time_In.getText().toString().trim());
+                        Toast.makeText(showInfoActivity.this, "Time In Successfully", Toast.LENGTH_SHORT).show();
+                    }
+                });
             }
 
         }
-
-
 
 
         String data = String.valueOf(dataID);
@@ -115,5 +143,9 @@ public class showInfoActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
         }
+    }
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private String getCurrentTime(){
+        return new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
     }
 }
