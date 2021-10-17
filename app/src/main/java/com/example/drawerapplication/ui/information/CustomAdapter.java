@@ -8,6 +8,8 @@ import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Environment;
@@ -30,8 +32,17 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.drawerapplication.R;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfDocument;
+import com.itextpdf.text.pdf.PdfWriter;
 
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -51,6 +62,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public ImageView ImageID, ShowImageID;
 
     private String savePath = Environment.getExternalStorageDirectory().getPath() + "/QRCode/";
+//    private String file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/Pdf.pfd/";
     private AppCompatActivity activity;
     List<String> recyclerListAll;
 
@@ -133,6 +145,25 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 View view_template_layout = inflater.inflate(R.layout.qrimageview, null);
                 ShowImageID = (ImageView) view_template_layout.findViewById(R.id.show_Images);//and set image to image view
                 Button btnSaveImage = (Button) view_template_layout.findViewById(R.id.btnSaveImage);
+                Button btnPrint = (Button) view_template_layout.findViewById(R.id.btnPrint);
+
+                btnPrint.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        String id = holder.list_Id.getText().toString();
+                        String name = holder.list_Name.getText().toString();
+                        String address = holder.list_Address.getText().toString();
+                        String age = holder.list_Age.getText().toString();
+                        String contact = holder.list_Contact.getText().toString();
+
+                        try {
+                            createPdf(id, name, address, age, contact);
+                        }catch (FileNotFoundException e){
+                            e.printStackTrace();
+                        }
+                    }
+                });
+
 
 
                 String stringValue = holder.list_Name.getText().toString().trim();
@@ -144,8 +175,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
                                 boolean nameSave = new QRGSaver().save(savePath, stringValue,
                                         bitmap, QRGContents.ImageType.IMAGE_JPEG);
-                                String nameResult = nameSave ? "Image Saved" : "Image Not Saved";
-                                Toast.makeText(activity, nameResult, Toast.LENGTH_LONG).show();
+                                if (nameSave == true){
+                                    Toast.makeText(context, "Saved Image", Toast.LENGTH_SHORT).show();
+                                }else {
+                                    Toast.makeText(context, "Image not Saved", Toast.LENGTH_SHORT).show();
+                                }
+//                                Toast.makeText(activity, nameResult, Toast.LENGTH_LONG).show();
 
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -224,6 +259,24 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
 
         }
+    }
+    private void createPdf(String id, String name, String address, String age, String contact) throws FileNotFoundException, DocumentException {
+//        String dest = "C:/itextExamples/sample.pdf";
+////        File file = new File(dest, "myPDF.pdf");
+//        OutputStream outputStream = new FileOutputStream(dest);
+        Document document = new Document();
+        PdfDocument pdfDocument = new PdfDocument(PdfWriter.getInstance(document,
+                new FileOutputStream("Image3.pdf")));
+
+//        PdfWriter writer = new PdfWriter(dest);
+//        PdfDocument pdfDocument = new PdfDocument(writer);
+//        Document document = new Document(pdfDocument);
+
+        Drawable d = Getit
+
+        Bitmap bitmap = ((BitmapDrawable)d)
+        document.close();
+        Toast.makeText(context, "Pdf Created", Toast.LENGTH_SHORT).show();
     }
 }
 

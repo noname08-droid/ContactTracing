@@ -86,11 +86,21 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"/>
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:layout_marginTop="20dp"
         android:layout_gravity="center">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnTimeIn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/shape"
+            android:text="TimeIn"
+            android:textAllCaps="false"
+            android:textStyle="bold" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnRegister"
@@ -98,19 +108,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Register"
+            android:layout_marginTop="5dp"
             android:textStyle="bold"
             android:textAllCaps="false"
             android:visibility="invisible"/>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnTimeIn"
-            android:background="@drawable/shape"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TimeIn"
-            android:textStyle="bold"
-            android:textAllCaps="false"
-            android:visibility="invisible"/>
-        </RelativeLayout>
+        </LinearLayout>
     </LinearLayout>
 </ScrollView>

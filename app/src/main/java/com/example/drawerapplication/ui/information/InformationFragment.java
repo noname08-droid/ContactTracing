@@ -30,7 +30,7 @@ public class InformationFragment extends Fragment {
     private FragmentInformationBinding binding;
 
     private EditText name, address, age, contact;
-    private TextView date, time;
+    public TextView date, time;
     private Button btnAdd, btnViewData;
     DatabaseHelper mDatabaseHelper;
 

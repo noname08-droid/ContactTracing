@@ -36,7 +36,7 @@ import androidmads.library.qrgenearator.QRGEncoder;
 
 public class showInfoActivity extends AppCompatActivity {
     TextView txtName, txtAge, txtAddress, txtContact, Date_In, newID, Time_In;
-    Button btnRegister, btnTimeIn;
+    public Button btnRegister, btnTimeIn;
     ImageView txtImage;
     private Bitmap bitmap;
     private QRGEncoder idEncoder;
@@ -98,18 +98,19 @@ public class showInfoActivity extends AppCompatActivity {
         }else {
             while (cursor.moveToNext()){
                 newID.setText(cursor.getString(0));
-                txtName.setText(cursor.getString(1));//columnindex 0 is for ID number
+                txtName.setText(cursor.getString(1));
                 txtAddress.setText(cursor.getString(2));
                 txtAge.setText(cursor.getString(3));
                 txtContact.setText(cursor.getString(4));
 
-                btnTimeIn.setVisibility(View.VISIBLE);
                 btnTimeIn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         mdatabasehelper.addTimeInData(Integer.parseInt(newID.getText().toString().trim()),
                                 Date_In.getText().toString().trim(), Time_In.getText().toString().trim());
                         Toast.makeText(showInfoActivity.this, "Time In Successfully", Toast.LENGTH_SHORT).show();
+
+
                     }
                 });
             }
