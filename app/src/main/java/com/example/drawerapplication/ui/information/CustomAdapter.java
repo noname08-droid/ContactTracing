@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -28,6 +29,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -261,22 +263,27 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         }
     }
     private void createPdf(String id, String name, String address, String age, String contact) throws FileNotFoundException, DocumentException {
-//        String dest = "C:/itextExamples/sample.pdf";
-////        File file = new File(dest, "myPDF.pdf");
-//        OutputStream outputStream = new FileOutputStream(dest);
+        String PathValue = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
+        File file = new File(PathValue, "myPDF.pdf");
+        OutputStream outputStream = new FileOutputStream(file);
+
+        PdfWriter writer = new PdfWriter(file);
         Document document = new Document();
-        PdfDocument pdfDocument = new PdfDocument(PdfWriter.getInstance(document,
-                new FileOutputStream("Image3.pdf")));
+        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Image3.pdf"));
+        PdfDocument pdfDocument = new PdfDocument(writer);
 
 //        PdfWriter writer = new PdfWriter(dest);
 //        PdfDocument pdfDocument = new PdfDocument(writer);
 //        Document document = new Document(pdfDocument);
 
-        Drawable d = Getit
+        Drawable d = ResourcesCompat.getDrawable(getResources(), R.drawable.upang, null);
 
-        Bitmap bitmap = ((BitmapDrawable)d)
+        Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
         document.close();
         Toast.makeText(context, "Pdf Created", Toast.LENGTH_SHORT).show();
+    }
+
+    private Resources getResources() {
     }
 }
 

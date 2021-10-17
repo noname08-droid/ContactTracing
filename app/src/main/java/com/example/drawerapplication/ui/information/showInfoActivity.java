@@ -108,8 +108,9 @@ public class showInfoActivity extends AppCompatActivity {
                     public void onClick(View view) {
                         mdatabasehelper.addTimeInData(Integer.parseInt(newID.getText().toString().trim()),
                                 Date_In.getText().toString().trim(), Time_In.getText().toString().trim());
-                        Toast.makeText(showInfoActivity.this, "Time In Successfully", Toast.LENGTH_SHORT).show();
 
+                        Toast.makeText(showInfoActivity.this, "Time In Successfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(showInfoActivity.this, "Time In Successfully", Toast.LENGTH_SHORT).show();
 
                     }
                 });
