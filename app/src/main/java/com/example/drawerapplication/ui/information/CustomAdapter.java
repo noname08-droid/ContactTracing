@@ -3,21 +3,25 @@ package com.example.drawerapplication.ui.information;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Point;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.icu.text.SimpleDateFormat;
+import android.graphics.pdf.PdfDocument;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,26 +33,19 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.core.content.res.ResourcesCompat;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.drawerapplication.R;
-import com.itextpdf.text.Document;
-import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.pdf.PdfDocument;
-import com.itextpdf.text.pdf.PdfWriter;
 
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+import java.util.zip.Inflater;
 
 import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
@@ -62,9 +59,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private QRGEncoder idEncoder;
     public String Put_ID;
     public ImageView ImageID, ShowImageID;
+//
 
+    private String path;
+    public static final int READ_PHONE = 110;
+    private Display mDisplay;
+    private Bitmap bitmaps;
+    private int totalHeight;
+    private int totalWidth;
+    private String file_name = "Screenshot";
+    private File myPath;
+    private String imagesUri;
+
+//
     private String savePath = Environment.getExternalStorageDirectory().getPath() + "/QRCode/";
-//    private String file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).getPath() + "/Pdf.pfd/";
     private AppCompatActivity activity;
     List<String> recyclerListAll;
 
@@ -149,20 +157,32 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 Button btnSaveImage = (Button) view_template_layout.findViewById(R.id.btnSaveImage);
                 Button btnPrint = (Button) view_template_layout.findViewById(R.id.btnPrint);
 
+
+                WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+                mDisplay = wm.getDefaultDisplay();
+                if (Build.VERSION.SDK_INT >= 23){
+                    if (context.checkSelfPermission(Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED
+                    && context.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED && context.checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                    == PackageManager.PERMISSION_GRANTED){
+                    }else {
+//                        ActivityCompat.requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                        ActivityCompat.requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                                Manifest.permission.READ_EXTERNAL_STORAGE},READ_PHONE);
+                        ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+                    }
+                }
+
+
                 btnPrint.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        String id = holder.list_Id.getText().toString();
-                        String name = holder.list_Name.getText().toString();
-                        String address = holder.list_Address.getText().toString();
-                        String age = holder.list_Age.getText().toString();
-                        String contact = holder.list_Contact.getText().toString();
 
-                        try {
-                            createPdf(id, name, address, age, contact);
-                        }catch (FileNotFoundException e){
-                            e.printStackTrace();
-                        }
+                        btnPrint.setVisibility(View.GONE);
+
+                        takeScreenShot();
+
+                        btnPrint.setVisibility(view.VISIBLE);
                     }
                 });
 
@@ -258,32 +278,112 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
             ImageID = itemView.findViewById(R.id.imageView);
 
-
-
         }
     }
-    private void createPdf(String id, String name, String address, String age, String contact) throws FileNotFoundException, DocumentException {
-        String PathValue = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
-        File file = new File(PathValue, "myPDF.pdf");
-        OutputStream outputStream = new FileOutputStream(file);
+    public Bitmap getBitmapFormView(View view,  int totalHeight, int totalWidth){
 
-        PdfWriter writer = new PdfWriter(file);
-        Document document = new Document();
-        PdfWriter writer = PdfWriter.getInstance(document, new FileOutputStream("Image3.pdf"));
-        PdfDocument pdfDocument = new PdfDocument(writer);
+        Bitmap returnBitmap = Bitmap.createBitmap(300, 300, Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(returnBitmap);
+        Drawable bgDrawable = view.getBackground();
 
-//        PdfWriter writer = new PdfWriter(dest);
-//        PdfDocument pdfDocument = new PdfDocument(writer);
-//        Document document = new Document(pdfDocument);
-
-        Drawable d = ResourcesCompat.getDrawable(getResources(), R.drawable.upang, null);
-
-        Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
-        document.close();
-        Toast.makeText(context, "Pdf Created", Toast.LENGTH_SHORT).show();
+        if (bgDrawable == null){
+            bgDrawable.draw(canvas);
+        }else{
+            canvas.drawColor(Color.WHITE);
+        }
+        view.draw(canvas);
+        return returnBitmap;
     }
 
-    private Resources getResources() {
+    private void takeScreenShot(){
+        File folder = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/screenShot/");
+
+        if (!folder.exists()){
+            boolean success = folder.mkdir();
+        }
+        path = folder.getAbsolutePath();
+        path = path + "/" + file_name + System.currentTimeMillis() + ".pdf";
+
+//        @SuppressLint("ResourceType") View u = View.inflate(context,R.id.contactTracing, null);
+//        @SuppressLint("ResourceType") NestedScrollView z = (NestedScrollView) View.inflate(context, R.id.contactTracing, null);
+        LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View print_layout = inflater.inflate(R.layout.print_layout, null);
+        View u = print_layout.findViewById(R.id.contactTracing);
+        View z = print_layout.findViewById(R.id.contactTracing);
+        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        mDisplay = wm.getDefaultDisplay();
+
+//        totalHeight = z.getChildAt(0).getHeight();
+//        totalWidth = z.getChildAt(0).getWidth();
+        totalWidth = z.getHeight();
+        totalHeight = z.getWidth();
+        totalWidth = u.getHeight();
+        totalHeight = u.getWidth();
+
+        String extr = Environment.getExternalStorageDirectory() + "/Contact Traicing/";
+        File file = new File(extr);
+        if (!file.exists())
+            file.mkdir();
+        String fileName = file_name + ".jpg";
+        myPath = new File(extr, fileName);
+        imagesUri = myPath.getPath();
+        bitmaps = getBitmapFormView(u, totalHeight,totalWidth);
+
+        try {
+            FileOutputStream fos = new FileOutputStream(myPath);
+            bitmaps.compress(Bitmap.CompressFormat.PNG, 100, fos);
+            fos.flush();
+            fos.close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        
+        createPDF();
+    }
+
+    private void createPDF() {
+        PdfDocument document = new PdfDocument();
+        android.graphics.pdf.PdfDocument.PageInfo pageInfo
+                = new android.graphics.pdf.PdfDocument.PageInfo.Builder(bitmaps.getWidth(),
+                bitmaps.getHeight(), 1).create();
+        PdfDocument.Page page = document.startPage(pageInfo);
+
+        Canvas canvas = page.getCanvas();
+
+        Paint paint = new Paint();
+        paint.setColor(Color.parseColor("#ffffff"));
+        canvas.drawPaint(paint);
+
+        Bitmap bitmap = Bitmap.createScaledBitmap(this.bitmap, this.bitmap.getWidth(), this.bitmap.getHeight(), true);
+        paint.setColor(Color.BLUE);
+        canvas.drawBitmap(bitmap, 0,0, null);
+        document.finishPage(page);
+        File filePath = new File(path);
+        try {
+            document.writeTo(new FileOutputStream(filePath));
+        }catch (IOException e){
+            e.printStackTrace();
+            Toast.makeText(context,"Something went wrong",Toast.LENGTH_SHORT).show();
+        }
+        document.close();
+        if (myPath.exists())
+            myPath.delete();
+        openPdf(path);
+
+    }
+
+    private void openPdf(String path) {
+        File file = new File(path);
+        Intent target = new Intent(Intent.ACTION_VIEW);
+        target.setDataAndType(Uri.fromFile(file), "application/pdf");
+        target.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+
+        Intent intent = Intent.createChooser(target,"Open File");
+        try {
+            context.startActivity(intent);
+        }catch (ActivityNotFoundException e){
+            Toast.makeText(context, "No Apps to read PDF File", Toast.LENGTH_SHORT).show();
+        }
     }
 }
 

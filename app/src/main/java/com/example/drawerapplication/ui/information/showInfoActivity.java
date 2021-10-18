@@ -110,7 +110,6 @@ public class showInfoActivity extends AppCompatActivity {
                                 Date_In.getText().toString().trim(), Time_In.getText().toString().trim());
 
                         Toast.makeText(showInfoActivity.this, "Time In Successfully", Toast.LENGTH_SHORT).show();
-                        Toast.makeText(showInfoActivity.this, "Time In Successfully", Toast.LENGTH_SHORT).show();
 
                     }
                 });
