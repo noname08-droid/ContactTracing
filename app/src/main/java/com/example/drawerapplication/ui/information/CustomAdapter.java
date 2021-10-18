@@ -477,6 +477,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         Image qrCodeImage = new Image(qrCodeObject).setWidth(100).setHorizontalAlignment(HorizontalAlignment.CENTER);
 
 
+
+
         document.add(image);
         document.add(contactTracing);
         document.add(group);
