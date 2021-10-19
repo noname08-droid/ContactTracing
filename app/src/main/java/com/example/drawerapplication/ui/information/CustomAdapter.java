@@ -57,6 +57,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
@@ -65,6 +66,23 @@ import androidmads.library.qrgenearator.QRGContents;
 import androidmads.library.qrgenearator.QRGEncoder;
 import androidmads.library.qrgenearator.QRGSaver;
 
+
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
+
+import androidmads.library.qrgenearator.QRGContents;
+import androidmads.library.qrgenearator.QRGEncoder;
+import androidmads.library.qrgenearator.QRGSaver;
+
+@RequiresApi(api = Build.VERSION_CODES.R)
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
     Context context;
@@ -86,7 +104,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private String imagesUri;
 
 //
-    private String savePath = Environment.getExternalStorageDirectory().getPath() + "/QRCode/";
+    private String savePath = Environment.getExternalStorageDirectory().getPath() +"/QRCode/";
     private AppCompatActivity activity;
     List<String> recyclerListAll;
 
@@ -110,7 +128,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         this.context = activity;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @NonNull
     @Override
     public CustomAdapter.MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -120,7 +138,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return new MyViewHolder(view);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     public void onBindViewHolder(@NonNull CustomAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
         holder.list_Id.setText(String.valueOf(id.get(position)));
@@ -189,7 +207,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
 
                 btnPrint.setOnClickListener(new View.OnClickListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onClick(View view) {
 //                        btnPrint.setVisibility(View.GONE);
@@ -205,6 +222,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
                         try {
                             createPDF(id, name, address, age, contact);
+                            Toast.makeText(context,"Saved PDF",Toast.LENGTH_SHORT);
                         }catch (FileNotFoundException e){
                             e.printStackTrace();
                         }
@@ -226,6 +244,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                                     Toast.makeText(context, "Saved Image", Toast.LENGTH_SHORT).show();
                                 }else {
                                     Toast.makeText(context, "Image not Saved", Toast.LENGTH_SHORT).show();
+                                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
                                 }
 //                                Toast.makeText(activity, nameResult, Toast.LENGTH_LONG).show();
 
@@ -282,14 +301,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         return id.size();
     }
 
-
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
        public TextView list_Id, list_Name, list_Address, list_Age, list_Contact;
        public TextView addDate, addTime;
 
 
-        @RequiresApi(api = Build.VERSION_CODES.N)
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             list_Id = itemView.findViewById(R.id.ID);
@@ -300,7 +317,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
             addDate = itemView.findViewById(R.id.addDate);
             addTime = itemView.findViewById(R.id.addTime);
-
             ImageID = itemView.findViewById(R.id.imageView);
 
         }
@@ -410,10 +426,10 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 //            Toast.makeText(context, "No Apps to read PDF File", Toast.LENGTH_SHORT).show();
 //        }
 //    }
-    @RequiresApi(api = Build.VERSION_CODES.O)
     private void createPDF(String id , String name, String address, String age, String contact) throws FileNotFoundException {
         String pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
-        File file = new File(pdfPath, "/myPDF.pdf");
+        String nameOfPDF = name;
+        File file = new File(pdfPath, (name+".pdf"));
 //        java.io.File file = new java.io.File((context
 //                .getApplicationContext().getFileStreamPath("FileName.xml")
 //                .getPath()));
@@ -429,7 +445,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         Drawable d = context.getDrawable(R.drawable.upang);
         Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
         byte[] bitmapData = stream.toByteArray();
 
         ImageData imageData = ImageDataFactory.create(bitmapData);
@@ -464,7 +480,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyy");
-        LocalDate today = LocalDate.now();
+        LocalDateTime today = LocalDateTime.now();
         table.addCell(new Cell().add(new Paragraph("DATE")));
         table.addCell(new Cell().add(new Paragraph(today.format(dateFormatter).toString())));
 
@@ -475,8 +491,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         BarcodeQRCode barcodeQRCode = new BarcodeQRCode(id+"\n"+name+"\n"+address+"\n"+age+"\n"+today.format(dateFormatter)+"\n"+today.format(timeFormatter));
         PdfFormXObject qrCodeObject = barcodeQRCode.createFormXObject(ColorConstants.BLACK,pdfDocument);
         Image qrCodeImage = new Image(qrCodeObject).setWidth(100).setHorizontalAlignment(HorizontalAlignment.CENTER);
-
-
 
 
         document.add(image);

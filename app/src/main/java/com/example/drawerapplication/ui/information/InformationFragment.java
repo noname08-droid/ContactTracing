@@ -1,10 +1,6 @@
 package com.example.drawerapplication.ui.information;
 
 import android.content.Intent;
-
-import java.text.DateFormat;
-
-import java.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -21,6 +17,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.drawerapplication.databinding.FragmentInformationBinding;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
@@ -30,8 +28,8 @@ public class InformationFragment extends Fragment {
     private FragmentInformationBinding binding;
 
     private EditText name, address, age, contact;
-    public TextView date, time;
     private Button btnAdd, btnViewData;
+    public TextView date, time;
     DatabaseHelper mDatabaseHelper;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -65,7 +63,7 @@ public class InformationFragment extends Fragment {
             public void onClick(View view) {
 
                 if (name.length() != 0 && address.length() != 0
-                && age.length() != 0 && contact.length() != 0){
+                        && age.length() != 0 && contact.length() != 0){
 
                     mDatabaseHelper.addData(name.getText().toString(), address.getText().toString(),
                             age.getText().toString().trim(), Long.valueOf(contact.getText().toString().trim()),

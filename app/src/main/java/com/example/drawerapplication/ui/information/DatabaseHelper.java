@@ -76,7 +76,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }else {
             return true;
         }
-
     }
     public boolean addTimeInData( Integer id, String timeIN, String timeIN2){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -93,7 +92,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-
 
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();
