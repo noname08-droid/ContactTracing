@@ -102,7 +102,7 @@ public class showInfoActivity extends AppCompatActivity {
                 txtAddress.setText(cursor.getString(2));
                 txtAge.setText(cursor.getString(3));
                 txtContact.setText(cursor.getString(4));
-
+                btnTimeIn.setVisibility(View.VISIBLE);
                 btnTimeIn.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

@@ -7,8 +7,14 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".ui.information.InformationFragment"
-    android:layout_marginStart="10dp"
-    android:layout_marginEnd="10dp">
+    android:background="@drawable/background_main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp">
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -40,19 +46,26 @@
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardBackgroundColor="#5021F8"
+            app:cardCornerRadius="50dp">
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:src="@drawable/person"/>
+        </androidx.cardview.widget.CardView>
 
     <EditText
         android:id="@+id/name"
         android:layout_width="350dp"
         android:layout_height="40dp"
+        android:textColor="@color/white"
         android:inputType="text"
         android:hint="Enter your Name..."
         android:textSize="15sp"/>
-
     </LinearLayout>
 
     <LinearLayout
@@ -61,12 +74,19 @@
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
+        <androidx.cardview.widget.CardView
+            app:cardBackgroundColor="#5021F8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="50dp">
         <ImageView
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:src="@drawable/location"/>
+        </androidx.cardview.widget.CardView>
 
         <EditText
+            android:textColor="@color/white"
             android:id="@+id/address"
             android:layout_width="350dp"
             android:inputType="text"
@@ -83,15 +103,23 @@
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
+        <androidx.cardview.widget.CardView
+            app:cardBackgroundColor="#5021F8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="50dp">
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="40dp"
-            android:src="@drawable/age"/>
+            android:src="@drawable/ageview"/>
+        </androidx.cardview.widget.CardView>
 
         <EditText
             android:id="@+id/age"
             android:layout_width="350dp"
             android:layout_height="40dp"
+            android:textColor="@color/white"
             android:inputType="number"
             android:hint="Enter your Age..."
             android:textSize="15sp"/>
@@ -104,16 +132,25 @@
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
+        <androidx.cardview.widget.CardView
+            app:cardBackgroundColor="#5021F8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="50dp">
+
         <ImageView
             android:layout_width="50dp"
             android:layout_height="40dp"
-            android:src="@drawable/contact"/>
+            android:src="@drawable/vontact"/>
+
+        </androidx.cardview.widget.CardView>
 
         <EditText
             android:id="@+id/contact"
             android:layout_width="350dp"
             android:inputType="number"
             android:layout_height="40dp"
+            android:textColor="@color/white"
             android:hint="Enter your Contact..."
             android:textSize="15sp"/>
 
@@ -124,22 +161,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="vertical">
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:background="@drawable/shape"
             android:text="add"/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/viewdata"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="20dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/shape"
             android:text="view Data"/>
 
+        </LinearLayout>
     </LinearLayout>
-
 </LinearLayout>

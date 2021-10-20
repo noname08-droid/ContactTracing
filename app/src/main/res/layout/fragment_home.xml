@@ -8,21 +8,159 @@
     tools:context=".ui.home.HomeFragment"
     android:background="@drawable/background_main">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/upang2"/>
-
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:text="Preview"
-        android:textSize="50dp"
-        android:textStyle="bold"/>
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:paddingBottom="20dp">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_marginTop="20dp"
+            android:layout_marginStart="10dp"
+            android:orientation="vertical"
+            android:layout_marginEnd="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact Tracing Application"
+                android:textColor="@color/white"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Created by: Group2"
+                android:layout_marginTop="4dp"
+                android:textColor="@color/white"
+                android:textSize="10dp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="171dp"
+            android:layout_marginTop="-15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_weight="1"
+            app:cardBackgroundColor="#5021F8"
+            app:cardCornerRadius="35dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="105dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/upang2" />
+
+        </androidx.cardview.widget.CardView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="180dp"
+            app:cardBackgroundColor="#5021F8"
+            android:layout_height="170dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            app:cardCornerRadius="50dp">
+
+            <androidx.constraintlayout.utils.widget.ImageFilterView
+                android:layout_width="140dp"
+                android:layout_gravity="center"
+                android:layout_height="150dp"
+                android:src="@drawable/image1"/>
+
+        </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="180dp"
+                app:cardBackgroundColor="#5021F8"
+                android:layout_height="170dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="50dp">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:layout_width="140dp"
+                    android:layout_gravity="center"
+                    android:layout_height="115dp"
+                    android:src="@drawable/image5"/>
+
+            </androidx.cardview.widget.CardView>
 
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="180dp"
+                app:cardBackgroundColor="#5021F8"
+                android:layout_height="170dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="50dp">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:layout_width="180dp"
+                    android:layout_gravity="center"
+                    android:layout_height="110dp"
+                    android:src="@drawable/image2"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="180dp"
+                app:cardBackgroundColor="#5021F8"
+                android:layout_height="170dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:cardCornerRadius="50dp">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:layout_width="180dp"
+                    android:layout_gravity="center"
+                    android:layout_height="110dp"
+                    android:src="@drawable/image4"/>
+
+            </androidx.cardview.widget.CardView>
+
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/dataAct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:text="@string/data_privacy_act"
+            android:textColor="#0645AD"
+            android:textSize="20dp"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </LinearLayout>
 </LinearLayout>

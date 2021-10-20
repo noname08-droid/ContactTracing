@@ -102,7 +102,6 @@ public class InformationFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.N)
     private String getCurrentTime(){
         return new SimpleDateFormat("hh:mm a", Locale.getDefault()).format(new Date());
-        //dito kutaDrew
     }
 
 }

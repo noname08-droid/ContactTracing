@@ -2,11 +2,13 @@ package com.example.drawerapplication.ui.information;
 
 
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Toast;
 
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +25,7 @@ public class ListDataActivity extends AppCompatActivity {
     ArrayList<String> id, name, address, age, contact, date, time;
     CustomAdapter customAdapter;
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,7 @@ public class ListDataActivity extends AppCompatActivity {
 
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.R)
     private void populateRecyclerView() {
         mDatabaseHelper = new DatabaseHelper(ListDataActivity.this);
         id = new ArrayList<>();

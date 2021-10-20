@@ -16,7 +16,7 @@
             android:text="ID"
             android:layout_gravity="center"
             android:layout_marginTop="10dp"
-            android:visibility="visible"/>
+            android:visibility="invisible"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -86,10 +86,9 @@
         android:layout_gravity="center"
         android:layout_marginTop="10dp"/>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:layout_marginTop="20dp"
         android:layout_gravity="center">
 
@@ -99,6 +98,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape"
             android:text="TimeIn"
+            android:visibility="invisible"
             android:textAllCaps="false"
             android:textStyle="bold" />
 
@@ -112,6 +112,6 @@
             android:textStyle="bold"
             android:textAllCaps="false"
             android:visibility="invisible"/>
-        </LinearLayout>
+        </RelativeLayout>
     </LinearLayout>
 </ScrollView>
