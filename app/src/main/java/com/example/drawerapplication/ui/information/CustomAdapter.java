@@ -2,8 +2,6 @@ package com.example.drawerapplication.ui.information;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
@@ -14,7 +12,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Environment;
-import android.provider.DocumentsContract;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -34,7 +31,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.drawerapplication.R;
-import com.google.type.DateTime;
 import com.itextpdf.barcodes.BarcodeQRCode;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
@@ -45,13 +41,11 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.xobject.PdfFormXObject;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Cell;
-import com.itextpdf.layout.element.IBlockElement;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.HorizontalAlignment;
 import com.itextpdf.layout.property.TextAlignment;
-import com.itextpdf.text.pdf.Barcode;
 
 
 import java.io.ByteArrayOutputStream;
@@ -59,7 +53,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -78,19 +71,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     private QRGEncoder idEncoder;
     public String Put_ID;
     public ImageView ImageID, ShowImageID;
-//
-
-    private String path;
-    public static final int READ_PHONE = 110;
     private Display mDisplay;
-    private Bitmap bitmaps;
-    private int totalHeight;
-    private int totalWidth;
-    private String file_name = "Screenshot";
-    private File myPath;
-    private String imagesUri;
-
-    //
     private String savePath = Environment.getExternalStorageDirectory().getPath() +"/QRCode/";
     private AppCompatActivity activity;
     List<String> recyclerListAll;
@@ -184,11 +165,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                 btnPrint.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-//                        btnPrint.setVisibility(View.GONE);
-//
-//                        takeScreenShot();
-//
-//                        btnPrint.setVisibility(view.VISIBLE);
                         String id = holder.list_Id.getText().toString();
                         String name = holder.list_Name.getText().toString();
                         String address = holder.list_Address.getText().toString();
@@ -212,15 +188,15 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                     public void onClick(View view) {
                         if (ContextCompat.checkSelfPermission(context.getApplicationContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                             try {
+
                                 boolean nameSave = new QRGSaver().save(savePath, stringValue,
                                         bitmap, QRGContents.ImageType.IMAGE_JPEG);
                                 if (nameSave == true){
                                     Toast.makeText(context, "Saved Image", Toast.LENGTH_SHORT).show();
                                 }else {
                                     Toast.makeText(context, "Image not Saved", Toast.LENGTH_SHORT).show();
-                                    ActivityCompat.requestPermissions((Activity) context, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+                                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
                                 }
-//                                Toast.makeText(activity, nameResult, Toast.LENGTH_LONG).show();
 
                             } catch (Exception e) {
                                 e.printStackTrace();
@@ -261,7 +237,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
 
                 AlertDialog.Builder builder = alertdialog.setView(view_template_layout);
-                builder.show();
+                    builder.show();
 
             }
         });
@@ -277,8 +253,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     public class MyViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView list_Id, list_Name, list_Address, list_Age, list_Contact;
-        public TextView addDate, addTime;
+       public TextView list_Id, list_Name, list_Address, list_Age, list_Contact;
+       public TextView addDate, addTime;
+
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -295,10 +272,12 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         }
     }
 
+
     private void createPDF(String id , String name, String address, String age, String contact) throws FileNotFoundException {
         String pdfPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).toString();
         String nameOfPDF = name;
-        File file = new File(pdfPath, (nameOfPDF+".pdf"));
+        File file = new File(pdfPath, (name+".pdf"));
+
         OutputStream outputStream = new FileOutputStream(file);
 
         PdfWriter writer = new PdfWriter(file);
@@ -308,7 +287,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         pdfDocument.setDefaultPageSize(PageSize.A6);
         document.setMargins(0, 0, 0, 0);
 
-        Drawable d = context.getDrawable(R.drawable.upanglogo);
+        Drawable d = context.getDrawable(R.drawable.upang);
         Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
@@ -320,38 +299,39 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         Paragraph contactTracing = new Paragraph("Contact Tracing")
                 .setBold().setFontSize(15).setTextAlignment(TextAlignment.CENTER);
 
-        Paragraph group = new Paragraph("Application Created by Students of BSIT\n").setTextAlignment(TextAlignment.CENTER).setFontSize(10);
+        Paragraph group = new Paragraph("Application Created by Student of BSIT"
+        ).setTextAlignment(TextAlignment.CENTER).setFontSize(10);
 
         float[] width = {100f, 100f};
         Table table = new Table(width);
         table.setHorizontalAlignment(HorizontalAlignment.CENTER);
 
-        table.addCell(new Cell().add(new Paragraph("Visitor ID")));
-        table.addCell(new Cell().add(new Paragraph(id)));
+        table.addCell(new Cell().add(new Paragraph("ID"))).setFontSize(10);
+        table.addCell(new Cell().add(new Paragraph(id))).setFontSize(10);
 
-        table.addCell(new Cell().add(new Paragraph("NAME")));
-        table.addCell(new Cell().add(new Paragraph(name)));
+        table.addCell(new Cell().add(new Paragraph("Name"))).setFontSize(10);
+        table.addCell(new Cell().add(new Paragraph(name))).setFontSize(10);
 
-        table.addCell(new Cell().add(new Paragraph("ADDRESS")));
-        table.addCell(new Cell().add(new Paragraph(address)));
+        table.addCell(new Cell().add(new Paragraph("Address"))).setFontSize(10);
+        table.addCell(new Cell().add(new Paragraph(address))).setFontSize(10);
 
-        table.addCell(new Cell().add(new Paragraph("AGE")));
-        table.addCell(new Cell().add(new Paragraph(age)));
+        table.addCell(new Cell().add(new Paragraph("Age"))).setFontSize(10);
+        table.addCell(new Cell().add(new Paragraph(age))).setFontSize(10);
 
-        table.addCell(new Cell().add(new Paragraph("CONTACT")));
-        table.addCell(new Cell().add(new Paragraph(contact)));
+        table.addCell(new Cell().add(new Paragraph("Contact"))).setFontSize(10);
+        table.addCell(new Cell().add(new Paragraph(contact))).setFontSize(10);
 
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyy");
         LocalDateTime today = LocalDateTime.now();
-        table.addCell(new Cell().add(new Paragraph("DATE")));
-        table.addCell(new Cell().add(new Paragraph(today.format(dateFormatter).toString())));
+        table.addCell(new Cell().add(new Paragraph("Date"))).setFontSize(10);
+        table.addCell(new Cell().add(new Paragraph(today.format(dateFormatter).toString()))).setFontSize(10);
 
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm:ss a");
-        table.addCell(new Cell().add(new Paragraph("CONTACT")));
-        table.addCell(new Cell().add(new Paragraph(today.format(timeFormatter).toString())));
+        table.addCell(new Cell().add(new Paragraph("Time"))).setFontSize(10);
+        table.addCell(new Cell().add(new Paragraph(today.format(timeFormatter).toString()))).setFontSize(10);
 
-        BarcodeQRCode barcodeQRCode = new BarcodeQRCode(id);
+        BarcodeQRCode barcodeQRCode = new BarcodeQRCode(id+"\n"+name+"\n"+address+"\n"+age+"\n"+today.format(dateFormatter)+"\n"+today.format(timeFormatter));
         PdfFormXObject qrCodeObject = barcodeQRCode.createFormXObject(ColorConstants.BLACK,pdfDocument);
         Image qrCodeImage = new Image(qrCodeObject).setWidth(100).setHorizontalAlignment(HorizontalAlignment.CENTER);
 
@@ -365,3 +345,4 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         Toast.makeText(context, "Pdf Created", Toast.LENGTH_SHORT).show();
     }
 }
+

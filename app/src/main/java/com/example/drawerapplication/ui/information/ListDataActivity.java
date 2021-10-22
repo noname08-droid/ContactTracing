@@ -26,7 +26,6 @@ public class ListDataActivity extends AppCompatActivity {
     CustomAdapter customAdapter;
 
     @RequiresApi(api = Build.VERSION_CODES.R)
-    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.list_layout);

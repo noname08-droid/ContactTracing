@@ -39,7 +39,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
 
 
-    @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         String createTable = "CREATE TABLE " + TABLE_NAME + " (ID INTEGER PRIMARY KEY AUTOINCREMENT, "
                 + COL2 + " TEXT, " + COL3 + " TEXT, " + COL4 + " TEXT, " +
@@ -51,7 +50,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         sqLiteDatabase.execSQL(createTable2);
     }
 
-    @Override
     public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
         sqLiteDatabase.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME2);
@@ -76,7 +74,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }else {
             return true;
         }
-
     }
     public boolean addTimeInData( Integer id, String timeIN, String timeIN2){
         SQLiteDatabase db = this.getWritableDatabase();
@@ -93,7 +90,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-
 
     public Cursor getData(){
         SQLiteDatabase db = this.getWritableDatabase();

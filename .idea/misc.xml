@@ -10,12 +10,11 @@
         <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/drawable/ic_baseline_my_location.xml" value="0.1125" />
         <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/drawable/ic_baseline_person.xml" value="0.1125" />
         <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/drawable/ic_baseline_qr_code_scanner_24.xml" value="0.11614583333333334" />
-        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/activity_main.xml" value="0.12092391304347826" />
         <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/app_bar_main.xml" value="0.14673913043478262" />
-        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/content_main.xml" value="0.14418125643666324" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/content_main.xml" value="0.9" />
         <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/fragment_generator.xml" value="0.1" />
-        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/fragment_home.xml" value="0.22" />
-        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/fragment_information.xml" value="0.18" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/fragment_home.xml" value="0.11730072463768115" />
+        <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/fragment_information.xml" value="0.22" />
         <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/fragment_scanner.xml" value="0.1" />
         <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/list_layout.xml" value="0.292259083728278" />
         <entry key="..\:/Users/cabal/Android projects/DrawerApplication/app/src/main/res/layout/nav_header_main.xml" value="0.15670289855072464" />

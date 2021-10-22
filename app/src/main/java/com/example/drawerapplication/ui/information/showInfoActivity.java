@@ -47,7 +47,6 @@ public class showInfoActivity extends AppCompatActivity {
     DatabaseHelper mdatabasehelper;
 
     @RequiresApi(api = Build.VERSION_CODES.N)
-    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.new_layout);
@@ -85,7 +84,6 @@ public class showInfoActivity extends AppCompatActivity {
             btnRegister.setOnClickListener(new View.OnClickListener() {
 
                 @SuppressLint("ResourceType")
-                @Override
                 public void onClick(View view) {
                     FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
                     informationFragment = new InformationFragment();
@@ -104,13 +102,11 @@ public class showInfoActivity extends AppCompatActivity {
                 txtContact.setText(cursor.getString(4));
                 btnTimeIn.setVisibility(View.VISIBLE);
                 btnTimeIn.setOnClickListener(new View.OnClickListener() {
-                    @Override
                     public void onClick(View view) {
                         mdatabasehelper.addTimeInData(Integer.parseInt(newID.getText().toString().trim()),
                                 Date_In.getText().toString().trim(), Time_In.getText().toString().trim());
 
                         Toast.makeText(showInfoActivity.this, "Time In Successfully", Toast.LENGTH_SHORT).show();
-
                     }
                 });
             }

@@ -15,7 +15,13 @@
         android:layout_height="match_parent" />
 
     <com.google.android.material.navigation.NavigationView
+        android:background="@drawable/nav_background"
         android:id="@+id/nav_view"
+        app:itemTextColor="@color/white"
+        app:itemTextAppearance="?android:textAppearanceMedium"
+        app:itemIconTint="#fff"
+        app:itemShapeFillColor="#5021F8"
+        app:itemIconSize="30dp"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

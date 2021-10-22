@@ -3,7 +3,12 @@ package com.example.drawerapplication;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Menu;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.OvershootInterpolator;
+import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -20,6 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
+    private FloatingActionButton gmail, information, fab;
+    boolean isOpen = false;
+    Float translationYaxis = 100f;
+    OvershootInterpolator interpolator = new OvershootInterpolator();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,19 +36,18 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        gmail = binding.appBarMain.gmail;
+        information = binding.appBarMain.information;
+        fab = binding.appBarMain.fab;
+
+
 
         setSupportActionBar(binding.appBarMain.toolbar);
-        binding.appBarMain.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
+        ShowMenu();
+
         DrawerLayout drawer = binding.drawerLayout;
         NavigationView navigationView = binding.navView;
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
                 .setOpenableLayout(drawer)
@@ -61,6 +69,59 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
+    }
+    private void ShowMenu(){
+        gmail.setAlpha(0f);
+        information.setAlpha(0f);
+
+        gmail.setTranslationY(translationYaxis);
+        information.setTranslationY(translationYaxis);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (isOpen){
+                    Closemenu();
+                }else{
+                    Openmenu();
+                }
+            }
+        });
+        gmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(MainActivity.this, "gmail", Toast.LENGTH_SHORT).show();
+            }
+        });
+        information.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialog();
+//                Toast.makeText(MainActivity.this, "information", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void Openmenu() {
+        isOpen = !isOpen;
+        fab.setImageResource(R.drawable.ic_baseline_info_24);
+        gmail.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        information.animate().translationY(0f).alpha(1f).setInterpolator(interpolator).setDuration(300).start();
+        gmail.setVisibility(View.VISIBLE);
+        information.setVisibility(View.VISIBLE);
+    }
+
+    private void Closemenu() {
+        isOpen = !isOpen;
+        fab.setImageResource(R.drawable.ic_baseline_help_24);
+        gmail.animate().translationY(translationYaxis).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        information.animate().translationY(translationYaxis).alpha(0f).setInterpolator(interpolator).setDuration(300).start();
+        gmail.setVisibility(View.INVISIBLE);
+        information.setVisibility(View.INVISIBLE);
+    }
+    private void openDialog(){
+        DialogActivity dialogActivity = new DialogActivity();
+        dialogActivity.show(getSupportFragmentManager(),"dialogActivity");
     }
 
 }

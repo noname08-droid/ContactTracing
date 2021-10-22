@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="@dimen/nav_header_height"
-    android:background="#39D13F"
+    android:background="#0B3EA6"
     android:gravity="bottom"
     android:orientation="vertical"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -12,21 +12,30 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-15dp"
+        android:layout_weight="1"
+        app:cardBackgroundColor="#5021F8"
+        app:cardCornerRadius="35dp">
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="90dp"
         android:layout_height="90dp"
+        android:layout_gravity="center"
         android:contentDescription="@string/nav_header_desc"
-        android:layout_marginStart="-10dp"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@drawable/upang" />
 
+    </androidx.cardview.widget.CardView>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
-        android:text="Group2"
-        android:textColor="#000"
+        android:text="Contact tracing application"
+        android:textColor="#fff"
         android:textStyle="bold"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -34,6 +43,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000"
-        android:text="Contact tracing application form" />
+        android:textColor="#fff"
+        android:text="category" />
 </LinearLayout>

@@ -6,7 +6,8 @@
     android:orientation="vertical"
     android:layout_marginStart="5dp"
     android:layout_marginEnd="5dp"
-    android:layout_marginTop="10dp">
+    android:layout_marginTop="10dp"
+    >
 
     <LinearLayout
         android:visibility="invisible"
@@ -40,7 +41,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        app:cardBackgroundColor="#936520"
+        app:cardBackgroundColor="#5021F8"
         app:cardCornerRadius="30dp">
 
 
@@ -56,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="10dp"
-            android:textColor="#000"
+            android:textColor="#fff"
             android:textStyle="bold"
             android:layout_gravity="center"
             android:text=""
@@ -79,7 +80,7 @@
         android:id="@+id/list_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#000"
+        android:textColor="#fff"
         android:textStyle="bold"
         android:text="name"
         android:textSize="17sp"/>
@@ -88,6 +89,7 @@
             android:id="@+id/list_address"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:text="address"
             android:textSize="15sp"/>
 
@@ -95,6 +97,7 @@
             android:id="@+id/list_age"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:text="age"
             android:textSize="15sp"/>
 
@@ -102,6 +105,7 @@
             android:id="@+id/list_contact"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:text="contact"
             android:textSize="15sp"/>
 
