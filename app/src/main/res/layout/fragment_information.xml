@@ -29,6 +29,7 @@
             android:id="@+id/dateRegistered"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="#fff"
             android:text="yyyy-mm-dd"
             android:textSize="15sp" />
 
@@ -38,6 +39,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:text="yyyy-mm-dd"
+            android:textColor="#fff"
             android:textSize="15sp" />
 
     </LinearLayout>
@@ -48,23 +50,17 @@
         android:layout_marginTop="10dp"
         android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardBackgroundColor="#5021F8"
-            app:cardCornerRadius="50dp">
-
         <ImageView
             android:layout_width="50dp"
             android:layout_height="40dp"
             android:src="@drawable/person"/>
-        </androidx.cardview.widget.CardView>
 
     <EditText
         android:id="@+id/name"
         android:layout_width="350dp"
         android:layout_height="40dp"
-        android:textColor="@color/white"
+        android:textColorHint="#fff"
+        android:textColor="#fff"
         android:inputType="text"
         android:hint="Enter your Name..."
         android:textSize="15sp"/>
@@ -76,22 +72,17 @@
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            app:cardBackgroundColor="#5021F8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="50dp">
         <ImageView
             android:layout_width="50dp"
             android:layout_height="40dp"
-            android:src="@drawable/location"/>
-        </androidx.cardview.widget.CardView>
+            android:src="@drawable/newlocation"/>
 
         <EditText
-            android:textColor="@color/white"
+            android:textColor="#fff"
             android:id="@+id/address"
             android:layout_width="350dp"
             android:inputType="text"
+            android:textColorHint="#fff"
             android:layout_height="40dp"
             android:hint="Enter your Address..."
             android:textSize="15sp"/>
@@ -105,23 +96,18 @@
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            app:cardBackgroundColor="#5021F8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="50dp">
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="40dp"
-            android:src="@drawable/ageview"/>
-        </androidx.cardview.widget.CardView>
+            android:src="@drawable/newage"/>
 
         <EditText
             android:id="@+id/age"
             android:layout_width="350dp"
             android:layout_height="40dp"
-            android:textColor="@color/white"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
             android:inputType="number"
             android:hint="Enter your Age..."
             android:textSize="15sp"/>
@@ -134,25 +120,20 @@
         android:layout_marginTop="20dp"
         android:orientation="horizontal">
 
-        <androidx.cardview.widget.CardView
-            app:cardBackgroundColor="#5021F8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:cardCornerRadius="50dp">
 
         <ImageView
             android:layout_width="50dp"
             android:layout_height="40dp"
-            android:src="@drawable/vontact"/>
+            android:src="@drawable/newcontact"/>
 
-        </androidx.cardview.widget.CardView>
 
         <EditText
             android:id="@+id/contact"
             android:layout_width="350dp"
             android:inputType="number"
             android:layout_height="40dp"
-            android:textColor="@color/white"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
             android:hint="Enter your Contact..."
             android:textSize="15sp"/>
 
@@ -169,16 +150,20 @@
             android:id="@+id/add"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textAllCaps="false"
+            android:textColor="#fff"
             android:background="@drawable/shape"
-            android:text="add"/>
+            android:text="Add"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/viewdata"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
+            android:textColor="#fff"
             android:background="@drawable/shape"
-            android:text="view Data"/>
+            android:textAllCaps="false"
+            android:text="ViewData"/>
 
         </LinearLayout>
     </LinearLayout>

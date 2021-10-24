@@ -104,7 +104,8 @@ public class showInfoActivity extends AppCompatActivity {
                 btnTimeIn.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View view) {
                         mdatabasehelper.addTimeInData(Integer.parseInt(newID.getText().toString().trim()),
-                                Date_In.getText().toString().trim(), Time_In.getText().toString().trim());
+                                txtName.getText().toString().trim(), Date_In.getText().toString().trim(),
+                                Time_In.getText().toString().trim());
 
                         Toast.makeText(showInfoActivity.this, "Time In Successfully", Toast.LENGTH_SHORT).show();
                     }

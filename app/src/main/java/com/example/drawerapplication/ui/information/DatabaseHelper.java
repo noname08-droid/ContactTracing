@@ -5,12 +5,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import java.util.ArrayList;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -28,6 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     private static final String TABLE_NAME2 = "TIME";
     private static final String T2COL1 = "ID";
+    private static final String T2COL0 = "NAME";
     private static final String T2COL2 = "DATE_IN";
     private static final String T2COL3 = "Time_IN";
 
@@ -45,7 +48,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COL5 + " INTEGER, " + COL6 + " TEXT, " + COL7 + " TEXT);";
         sqLiteDatabase.execSQL(createTable);
 
-        String createTable2 = "CREATE TABLE " + TABLE_NAME2 + " (ID INTEGER, "
+        String createTable2 = "CREATE TABLE " + TABLE_NAME2 + " (ID INTEGER, " + T2COL0 + " TEXT,"
                 + T2COL2 + " TEXT, " + T2COL3 + " TEXT);";
         sqLiteDatabase.execSQL(createTable2);
     }
@@ -75,11 +78,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             return true;
         }
     }
-    public boolean addTimeInData( Integer id, String timeIN, String timeIN2){
+    public boolean addTimeInData( Integer id, String Name, String timeIN, String timeIN2){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
         contentValues.put(T2COL1, Integer.parseInt(String.valueOf(id)));
+        contentValues.put(T2COL0, String.valueOf(Name));
         contentValues.put(T2COL2, String.valueOf(timeIN));
         contentValues.put(T2COL3, String.valueOf(timeIN2));
 
@@ -98,6 +102,13 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return data;
     }
 
+    public Cursor getTimeAndDateData(){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "SELECT * FROM " + TABLE_NAME2;
+        Cursor data = db.rawQuery(query,null);
+        return data;
+    }
+
     public Cursor getID(String id, TextView txtName, TextView txtAge, TextView txtAddress, TextView txtContact, ImageView txtImage) {
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery("SELECT * FROM " + TABLE_NAME + " WHERE " +
@@ -105,4 +116,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return res;
     }
+
+    public Cursor getName(TextView id, TextView storageName, TextView storageTime, TextView storageDate){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery("SELECT * FROM " + TABLE_NAME2 + " WHERE "
+                + "ID" + "=?", new String[]{String.valueOf(id)});
+        return res;
+    }
+
 }

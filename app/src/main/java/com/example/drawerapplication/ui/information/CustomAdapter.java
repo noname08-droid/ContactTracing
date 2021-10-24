@@ -2,9 +2,11 @@ package com.example.drawerapplication.ui.information;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -18,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -287,7 +290,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         pdfDocument.setDefaultPageSize(PageSize.A6);
         document.setMargins(0, 0, 0, 0);
 
-        Drawable d = context.getDrawable(R.drawable.upang);
+        Drawable d = context.getDrawable(R.drawable.upanglogo);
         Bitmap bitmap = ((BitmapDrawable)d).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 50, stream);
@@ -331,7 +334,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         table.addCell(new Cell().add(new Paragraph("Time"))).setFontSize(10);
         table.addCell(new Cell().add(new Paragraph(today.format(timeFormatter).toString()))).setFontSize(10);
 
-        BarcodeQRCode barcodeQRCode = new BarcodeQRCode(id+"\n"+name+"\n"+address+"\n"+age+"\n"+today.format(dateFormatter)+"\n"+today.format(timeFormatter));
+        BarcodeQRCode barcodeQRCode = new BarcodeQRCode(id);
         PdfFormXObject qrCodeObject = barcodeQRCode.createFormXObject(ColorConstants.BLACK,pdfDocument);
         Image qrCodeImage = new Image(qrCodeObject).setWidth(100).setHorizontalAlignment(HorizontalAlignment.CENTER);
 
@@ -343,6 +346,19 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         document.add(qrCodeImage);
         document.close();
         Toast.makeText(context, "Pdf Created", Toast.LENGTH_SHORT).show();
+    }
+
+    public static class MyViewHolder2 extends RecyclerView.ViewHolder {
+
+        public TextView myid, myname, mytime, mydate;
+
+        public MyViewHolder2(@NonNull View itemView) {
+            super(itemView);
+            myid = itemView.findViewById(R.id.myID);
+            myname = itemView.findViewById(R.id.myname);
+            mytime = itemView.findViewById(R.id.mytime);
+            mydate = itemView.findViewById(R.id.mydate);
+        }
     }
 }
 

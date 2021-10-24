@@ -20,4 +20,10 @@
         android:name="com.example.drawerapplication.ui.generator.GeneratorFragment"
         android:label="Scanner"
         tools:layout="@layout/fragment_generator" />
+    <fragment
+        android:id="@+id/adminFragment"
+        android:name="com.example.drawerapplication.ui.admin.AdminFragment"
+        android:label="Log In"
+        tools:layout="@layout/fragment_admin" />
+
 </navigation>

@@ -105,6 +105,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/shape"
             android:text="TimeIn"
+            android:textColor="#fff"
             android:visibility="invisible"
             android:textAllCaps="false"
             android:textStyle="bold" />
@@ -116,6 +117,7 @@
             android:layout_height="wrap_content"
             android:text="Register"
             android:layout_marginTop="5dp"
+            android:textColor="#fff"
             android:textStyle="bold"
             android:textAllCaps="false"
             android:visibility="invisible"/>

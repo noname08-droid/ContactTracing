@@ -90,14 +90,13 @@ public class MainActivity extends AppCompatActivity {
         gmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "gmail", Toast.LENGTH_SHORT).show();
+                gmailDialog();
             }
         });
         information.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openDialog();
-//                Toast.makeText(MainActivity.this, "information", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -122,6 +121,10 @@ public class MainActivity extends AppCompatActivity {
     private void openDialog(){
         DialogActivity dialogActivity = new DialogActivity();
         dialogActivity.show(getSupportFragmentManager(),"dialogActivity");
+    }
+    private void gmailDialog(){
+        GmailDialog gmailDialog = new GmailDialog();
+        gmailDialog.show(getSupportFragmentManager(),"gmailDialog");
     }
 
 }

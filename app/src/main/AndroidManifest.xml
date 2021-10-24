@@ -16,8 +16,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DrawerApplication">
-        <activity android:name=".ui.information.ListDataActivity"/>
-        <activity android:name=".ui.information.showInfoActivity"/>
+        <activity android:name=".ui.information.ListDataActivity"
+            android:label="list of Info"/>
+        <activity android:name=".ui.admin.TimeDateActivity"/>
+        <activity android:name=".ui.information.showInfoActivity"
+            android:label="Not yet Registered!"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"
