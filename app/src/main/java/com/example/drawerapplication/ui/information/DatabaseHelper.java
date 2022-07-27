@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,7 +16,6 @@ import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
-    private static final String TAG = "DatabaseHelper";
     private Context context;
     private static final String TABLE_NAME = "INFO";
     private static final String COL1 = "ID";
@@ -117,7 +115,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return res;
     }
 
-    public Cursor getName(TextView id, TextView storageName, TextView storageTime, TextView storageDate){
+    public Cursor myResultID(String id, ArrayList<String> storageName, ArrayList<String> storageTime, ArrayList<String> storageDate){
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor res =  db.rawQuery("SELECT * FROM " + TABLE_NAME2 + " WHERE "
                 + "ID" + "=?", new String[]{String.valueOf(id)});

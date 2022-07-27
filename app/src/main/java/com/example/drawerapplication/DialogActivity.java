@@ -16,7 +16,7 @@ public class DialogActivity extends AppCompatDialogFragment {
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setTitle("Developers Contact")
-                .setMessage("09062500492\n" + "12345678910\n" + "12345678910\n" + "12345678910\n"+"12345678910")
+                .setMessage("09614825763\n" + "09614825157\n" + "09614781577\n" + "09494168321")
                 .setPositiveButton("ok", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {

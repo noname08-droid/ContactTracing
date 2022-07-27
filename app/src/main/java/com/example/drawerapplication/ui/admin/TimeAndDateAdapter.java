@@ -1,23 +1,22 @@
 package com.example.drawerapplication.ui.admin;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.drawerapplication.R;
 import com.example.drawerapplication.ui.information.CustomAdapter;
-import com.example.drawerapplication.ui.information.DatabaseHelper;
-import com.example.drawerapplication.ui.information.showInfoActivity;
 
 import java.util.ArrayList;
 
@@ -51,17 +50,48 @@ public class TimeAndDateAdapter extends RecyclerView.Adapter<CustomAdapter.MyVie
         holder.mytime.setText(String.valueOf(time.get(position)));
         holder.mydate.setText(String.valueOf(date.get(position)));
 
+        holder.myid.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                AlertDialog.Builder alertdialog = new AlertDialog.Builder(context);
+                LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                View view_template_layout = inflater.inflate(R.layout.timeanddate_list, null);
+
+                WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+                holder.mDisplay = wm.getDefaultDisplay();
+
+                Button searchNow = (Button) view_template_layout.findViewById(R.id.btnsearch);
+                EditText editSearch = (EditText) view_template_layout.findViewById(R.id.editSearch);
+                TextView list = (TextView) view_template_layout.findViewById(R.id.list);
+
+                list.setVisibility(View.INVISIBLE);
+                searchNow.setVisibility(View.VISIBLE);
+                editSearch.setVisibility(View.VISIBLE);
+
+//                String IDValue = String.valueOf(id.get(position));
+
+                    searchNow.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+
+                            Intent intent = new Intent(context, ResearchResult.class);
+                            intent.putExtra("newID", String.valueOf(editSearch.getText()));
+                            context.startActivity(intent);
+
+                        }
+                    });
+
+                AlertDialog.Builder builder = alertdialog.setView(view_template_layout);
+                builder.show();
+            }
+        });
+
     }
 
     @Override
     public int getItemCount() {
         return id.size();
     }
-
-//    public void filterList(ArrayList<String> filteredList){
-//        id = filteredList;
-//        notifyDataSetChanged();
-//
-//    }
 
 }

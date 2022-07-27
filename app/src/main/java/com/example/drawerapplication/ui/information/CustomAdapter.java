@@ -2,11 +2,9 @@ package com.example.drawerapplication.ui.information;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
-import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -20,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,7 +65,7 @@ import androidmads.library.qrgenearator.QRGSaver;
 @RequiresApi(api = Build.VERSION_CODES.R)
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
-    Context context;
+    public Context context;
     public ArrayList id, name, address, age, contact, date, time;
     private Bitmap bitmap;
     private QRGEncoder idEncoder;
@@ -205,7 +202,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
                                 e.printStackTrace();
                             }
                         } else {
-                            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+                            ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
                         }
                     }
                 });
@@ -351,13 +348,28 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public static class MyViewHolder2 extends RecyclerView.ViewHolder {
 
         public TextView myid, myname, mytime, mydate;
+        public Display mDisplay;
 
         public MyViewHolder2(@NonNull View itemView) {
             super(itemView);
+
             myid = itemView.findViewById(R.id.myID);
             myname = itemView.findViewById(R.id.myname);
             mytime = itemView.findViewById(R.id.mytime);
             mydate = itemView.findViewById(R.id.mydate);
+        }
+    }
+
+    public static class MyViewHolder3 extends RecyclerView.ViewHolder {
+
+        public TextView resultId, resultName, resultTime, resultDate;
+
+        public MyViewHolder3(@NonNull View itemView) {
+            super(itemView);
+            resultId = itemView.findViewById(R.id.resultID);
+            resultName = itemView.findViewById(R.id.resultName);
+            resultTime = itemView.findViewById(R.id.resultTime);
+            resultDate = itemView.findViewById(R.id.resultDate);
         }
     }
 }

@@ -6,8 +6,8 @@
     android:orientation="vertical"
     android:layout_marginStart="5dp"
     android:layout_marginEnd="5dp"
-    android:layout_marginTop="10dp">
-
+    android:layout_marginTop="10dp"
+    >
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,7 +24,7 @@
             android:layout_marginBottom="10dp">
 
             <TextView
-                android:id="@+id/myID"
+                android:id="@+id/resultID"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
@@ -43,7 +43,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/myname"
+                    android:id="@+id/resultName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#fff"
@@ -52,7 +52,7 @@
                     android:textSize="20sp"/>
 
                 <TextView
-                    android:id="@+id/mytime"
+                    android:id="@+id/resultTime"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#fff"
@@ -60,7 +60,7 @@
                     android:textSize="20sp"/>
 
                 <TextView
-                    android:id="@+id/mydate"
+                    android:id="@+id/resultDate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textColor="#fff"

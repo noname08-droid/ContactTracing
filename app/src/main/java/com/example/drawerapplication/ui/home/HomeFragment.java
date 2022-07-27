@@ -40,8 +40,6 @@ public class HomeFragment extends Fragment {
                         "with this privacy policy.", Toast.LENGTH_SHORT).show();
             }
         });
-
-
         return root;
     }
 

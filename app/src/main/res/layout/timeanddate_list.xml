@@ -6,106 +6,65 @@
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
         android:layout_marginEnd="10dp"
         android:layout_marginStart="10dp"
         android:layout_gravity="center"
         android:background="@drawable/shape">
 
     <EditText
-        android:id="@+id/searchName"
+        android:id="@+id/editSearch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20dp"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:textColor="#fff"
         android:layout_marginStart="5dp"
         android:textColorHint="#fff"
-        android:layout_gravity="center"
         android:hint="Search..."/>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Search"
-            android:textAllCaps="false"
+            android:layout_toEndOf="@+id/editSearch"
+            android:background="@drawable/shape"
+            android:backgroundTint="@color/white"
+            android:textColor="#000"
+            android:visibility="invisible"
+            android:layout_alignParentTop="true"
             android:layout_marginStart="10dp"
+            android:textAllCaps="false"
             android:id="@+id/btnsearch"/>
 
-    </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/list"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:textColor="#fff"
+            android:layout_marginTop="10dp"
+            android:text="TimeIn List"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"/>
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
         android:layout_marginStart="5dp"
         android:layout_marginEnd="5dp"
-        android:layout_marginTop="10dp"
-        >
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            app:cardBackgroundColor="#B11D1D"
-            app:cardCornerRadius="30dp">
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp">
-
-                <TextView
-                    android:id="@+id/storageID"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="10dp"
-                    android:textColor="#fff"
-                    android:textStyle="bold"
-                    android:layout_gravity="center"
-                    android:textSize="30sp"/>
-
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginStart="10dp"
-                    android:orientation="vertical">
-
-                    <TextView
-                        android:id="@+id/storageName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#fff"
-                        android:textStyle="bold"
-                        android:textSize="20sp"/>
-
-                    <TextView
-                        android:id="@+id/storageTime"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#fff"
-                        android:textSize="20sp"/>
-
-                    <TextView
-                        android:id="@+id/storageDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#fff"
-                        android:textSize="20sp"/>
-
-
-                </LinearLayout>
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
+        android:layout_marginTop="10dp">
 
     </LinearLayout>
 

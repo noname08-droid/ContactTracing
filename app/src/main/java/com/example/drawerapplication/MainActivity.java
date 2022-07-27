@@ -8,7 +8,10 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.OvershootInterpolator;
 import android.widget.Toast;
 
+import com.google.android.material.bottomappbar.BottomAppBar;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.shape.CornerFamily;
+import com.google.android.material.shape.MaterialShapeDrawable;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
@@ -26,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private FloatingActionButton gmail, information, fab;
+    private BottomAppBar bottomAppBar;
     boolean isOpen = false;
     Float translationYaxis = 100f;
     OvershootInterpolator interpolator = new OvershootInterpolator();
@@ -39,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
         gmail = binding.appBarMain.gmail;
         information = binding.appBarMain.information;
         fab = binding.appBarMain.fab;
-
+//        bottomAppBar = binding.appBarMain.bottomAppBar;
 
 
         setSupportActionBar(binding.appBarMain.toolbar);
@@ -55,6 +59,18 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
         NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
         NavigationUI.setupWithNavController(navigationView, navController);
+
+
+
+//        float radius = getResources().getDimension(R.dimen.cardview_default_radius);
+//        MaterialShapeDrawable bottomBarBackground = (MaterialShapeDrawable) bottomAppBar.getBackground();
+//        bottomBarBackground.setShapeAppearanceModel(
+//                bottomBarBackground.getShapeAppearanceModel()
+//                        .toBuilder()
+//                        .setTopRightCorner(CornerFamily.ROUNDED,radius)
+//                        .setTopLeftCorner(CornerFamily.ROUNDED,radius)
+//                        .build());
+
     }
 
     @Override
